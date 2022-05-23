@@ -2,8 +2,13 @@
 
 function App() {
   return (
-    <div className="App">
-  hallo word
+    <div className="mainWrapper">
+ <header>
+
+ </header>
+ <section className="postList">
+
+ </section>
     </div>
   );
 }
