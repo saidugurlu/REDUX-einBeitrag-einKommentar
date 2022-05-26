@@ -1,19 +1,10 @@
-import { useState, useEffect } from "react";
-import axios from "axios";
+
 import { Link } from "react-router-dom";
+import { AppContext } from '../AppContext';
+import { useContext } from 'react';
 
 const Artikelliste = () => {
-  const [articles, setArticles] = useState([]);
-
-  useEffect(() => {
-    (async () => {
-      const response = await axios.get(
-        "https://react-yazi-yorum.herokuapp.com/posts"
-      );
-
-      setArticles(response.data);
-    })();
-  }, []);
+  const { articles } = useContext(AppContext);
 
 
   return articles.map((article, index) => {
