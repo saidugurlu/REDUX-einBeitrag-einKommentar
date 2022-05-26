@@ -1,6 +1,6 @@
 import { Routes, Route } from "react-router-dom";
 import Artikelliste from "./components/Artikelliste";
-import ArtikelDetail  from "./components/Artikelliste";
+import ArtikelDetail  from "./components/ArtikelDetail";
 
 function App() {
   return (
@@ -10,7 +10,8 @@ function App() {
       <div className="ui raised very padded text container segment">
         <Routes>
           <Route path="/" element={<Artikelliste />} />
-          <Route path="/:id" element={<ArtikelDetail />} />
+          <Route path="/posts/:id" element={<ArtikelDetail />} />
+           
         </Routes>
       </div>
     </div>
