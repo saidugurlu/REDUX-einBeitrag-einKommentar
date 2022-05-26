@@ -6,6 +6,21 @@ const ArtikelDetail = () => {
   const { id } = useParams();
   const [comments, setComments] = useState([]);
   const [articleDetails, setArticleDetails] = useState([]);
+  const [comment, setComment] = useState({
+    display_name: "",
+    body: "",
+  });
+
+  const handleCommentSubmit = async (comment) => {
+    await axios.post(
+      `https://react-yazi-yorum.herokuapp.com/posts/${id}/comments`,
+      comment
+    );
+  };
+
+  const handleOnChange = (event) => {
+    setComment({ ...comment, [event.target.name]: event.target.value });
+  };
 
   useEffect(() => {
     (async () => {
@@ -34,7 +49,7 @@ const ArtikelDetail = () => {
       <p>{articleDetails.created_at}</p>
       <p>{articleDetails.content}</p>
       <h3>Kommentare</h3>
-      {comments.map((comment ) => {
+      {comments.map((comment) => {
         return (
           <div key={comment.id}>
             <div className="ui relaxed list">
@@ -48,19 +63,39 @@ const ArtikelDetail = () => {
                   <a href="#d" className="header">
                     {comment.display_name}
                   </a>
-                  <div className="description">
-                    {comment.body} 
-                    <a href="#d">
-                      <b>Arrested Development</b>
-                    </a>
-                    just now.
-                  </div>
+                  <div className="description">{comment.body}</div>
                 </div>
               </div>
             </div>
           </div>
         );
       })}
+      <h3>Kommentieren</h3>
+      <form
+        className="ui form"
+        onSubmit={(e) => {
+          e.preventDefault();
+          handleCommentSubmit(comment);
+        }}
+      >
+        <div className="ui mini icon input">
+          <input
+            value={comment.display_name}
+            name="display_name"
+            onChange={handleOnChange}
+            type="text"
+            placeholder="Name..."
+          />
+        </div>
+        <textarea
+          value={comment.body}
+          name="body"
+          onChange={handleOnChange}
+          placeholder="Dein Kommentar..."
+          rows="3"
+        ></textarea>
+        <button className="ui black basic button" type="submit">Senden</button>
+      </form>
     </>
   );
 };
