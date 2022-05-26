@@ -1,9 +1,11 @@
-import React from 'react'
+import { useParams } from "react-router-dom";
+
+import React from "react";
 
 const ArtikelDetail = () => {
-  return (
-    <div>ArtikelDetail</div>
-  )
-}
+  const { id } = useParams();
+  console.log(id);
+  return <div>ArtikelDetail</div>;
+};
 
-export default ArtikelDetail
+export default ArtikelDetail;

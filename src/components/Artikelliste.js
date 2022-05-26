@@ -14,11 +14,13 @@ const Artikelliste = () => {
       setArticles(response.data);
     })();
   }, []);
+
+
   return articles.map((article, index) => {
     return (
-      <div className="ui relaxed divided list">
-        {
-          <div key={index} className="item">
+      <div  key={index}  className="ui relaxed divided list">
+        
+          <div className="item">
             <i className="large github middle aligned icon"></i>
             <div className="content">
               <Link to={`/posts/${article.id}`} className="header">
@@ -27,7 +29,7 @@ const Artikelliste = () => {
               <div className="description">{article.created_at}</div>
             </div>
           </div>
-        }
+        
       </div>
     );
   });
