@@ -1,5 +1,6 @@
-import { NavLink, Routes, Route } from "react-router-dom";
+import { Routes, Route } from "react-router-dom";
 import Artikelliste from "./components/Artikelliste";
+import ArtikelDetail  from "./components/Artikelliste";
 
 function App() {
   return (

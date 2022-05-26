@@ -1,5 +1,6 @@
 import { useState, useEffect } from "react";
 import axios from "axios";
+import { Link } from "react-router-dom";
 
 const Artikelliste = () => {
   const [articles, setArticles] = useState([]);
@@ -20,9 +21,9 @@ const Artikelliste = () => {
           <div key={index} className="item">
             <i className="large github middle aligned icon"></i>
             <div className="content">
-              <a href="#d" className="header">
+              <Link to={`/posts/${article.id}`} className="header">
                 {article.title}
-              </a>
+              </Link>
               <div className="description">{article.created_at}</div>
             </div>
           </div>
