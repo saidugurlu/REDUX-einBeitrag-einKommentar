@@ -1,17 +1,16 @@
-
-import Artikelliste from './components/Artikelliste'
+import { NavLink, Routes, Route } from "react-router-dom";
+import Artikelliste from "./components/Artikelliste";
 
 function App() {
-
-  
   return (
     <div className="mainContainer">
       <header></header>
 
       <div className="ui raised very padded text container segment">
-        <div className="ui relaxed divided list">
-       <Artikelliste/>
-        </div>
+        <Routes>
+          <Route path="/" element={<Artikelliste />} />
+          <Route path="/:id" element={<ArtikelDetail />} />
+        </Routes>
       </div>
     </div>
   );
