@@ -1,8 +1,8 @@
-import React from 'react'
+import CommentList from './CommentList'
 
-const ArtikelComments = () => {
+const ArtikelComments = ({comments}) => {
   return (
-    <div>ArtikelComments</div>
+    <CommentList comments={comments} />
   )
 }
 
