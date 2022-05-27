@@ -1,8 +1,10 @@
-import React from 'react'
+import React from "react";
 
-const CommentList = ({comments}) => {
+const CommentList = ({ comments }) => {
   return (
-    <>  <h3>Kommentare</h3>
+    <>
+      
+      <h3>Kommentare</h3>
       {comments.map((comment) => {
         return (
           <div key={comment.id}>
@@ -23,8 +25,9 @@ const CommentList = ({comments}) => {
             </div>
           </div>
         );
-      })}</>
-  )
-}
+      })}
+    </>
+  );
+};
 
-export default CommentList
+export default CommentList;

@@ -1,10 +1,10 @@
-import { createContext, useState, useEffect } from 'react';
+import { createContext, useState, useEffect } from "react";
 import axios from "axios";
 
 export const AppContext = createContext();
 
 const AppProvider = ({ children }) => {
-	const [articles, setArticles] = useState([]);
+  const [articles, setArticles] = useState([]);
 
   useEffect(() => {
     (async () => {
@@ -15,11 +15,9 @@ const AppProvider = ({ children }) => {
       setArticles(response.data);
     })();
   }, []);
-	return (
-		<AppContext.Provider value={{ articles }}>
-			{children}
-		</AppContext.Provider>
-	);
+  return (
+    <AppContext.Provider value={{ articles }}>{children}</AppContext.Provider>
+  );
 };
 
 export default AppProvider;
