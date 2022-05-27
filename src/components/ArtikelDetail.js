@@ -2,20 +2,23 @@ import { useParams } from "react-router-dom";
 import { useState, useEffect } from "react";
 import axios from "axios";
 
+const initialComment = {
+  display_name: "",
+  body: "",
+};
 const ArtikelDetail = () => {
   const { id } = useParams();
   const [comments, setComments] = useState([]);
   const [articleDetails, setArticleDetails] = useState([]);
-  const [comment, setComment] = useState({
-    display_name: "",
-    body: "",
-  });
+  const [comment, setComment] = useState(initialComment);
 
-  const handleCommentSubmit = async (comment) => {
+  const handleCommentSubmit = async (e) => {
+    e.preventDefault();
     await axios.post(
       `https://react-yazi-yorum.herokuapp.com/posts/${id}/comments`,
       comment
     );
+    setComment(initialComment);
   };
 
   const handleOnChange = (event) => {
@@ -71,13 +74,7 @@ const ArtikelDetail = () => {
         );
       })}
       <h3>Kommentieren</h3>
-      <form
-        className="ui form"
-        onSubmit={(e) => {
-          e.preventDefault();
-          handleCommentSubmit(comment);
-        }}
-      >
+      <form className="ui form" onSubmit={handleCommentSubmit}>
         <div className="ui mini icon input">
           <input
             value={comment.display_name}
@@ -94,7 +91,9 @@ const ArtikelDetail = () => {
           placeholder="Dein Kommentar..."
           rows="3"
         ></textarea>
-        <button className="ui black basic button" type="submit">Senden</button>
+        <button className="ui black basic button" type="submit">
+          Senden
+        </button>
       </form>
     </>
   );
