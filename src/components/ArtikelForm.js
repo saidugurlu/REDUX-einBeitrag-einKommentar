@@ -10,8 +10,7 @@ const ArtikelForm = () => {
   const onFormSubmit = async (e) => {
     e.preventDefault(); // for sicherheit
 
-    await axios.post("https://react-yazi-yorum.herokuapp.com/posts", article)
-      .data;
+    await axios.post("https://react-yazi-yorum.herokuapp.com/posts", article);
   };
 
   return (
