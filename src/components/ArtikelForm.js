@@ -1,21 +1,46 @@
-import React from "react";
+import { useState } from "react";
+import axios from "axios";
 
 const ArtikelForm = () => {
+  const [article, setArticle] = useState({ title: "", content: "" });
+
+  const onInputChange = (e) =>
+    setArticle({ ...article, [e.target.name]: e.target.value });
+
+  const onFormSubmit = async (e) => {
+    e.preventDefault(); // for sicherheit
+
+    await axios.post("https://react-yazi-yorum.herokuapp.com/posts", article)
+      .data;
+  };
+
   return (
     <div className="ui form">
       <div className="field">
         <label>Artikeltitel</label>
-        <input type="text" />
+        <input
+          value={article.title}
+          name="title"
+          onChange={onInputChange}
+          type="text"
+        />
       </div>
-      <div class="field">
+      <div className="field">
         <label>Textinhalt</label>
-        <textarea rows="3"></textarea>
+        <textarea
+          value={article.content}
+          onChange={onInputChange}
+          rows="3"
+          name="content"
+        ></textarea>
       </div>
 
-      <div class="ui buttons">
-        <button class="ui red button">Absagen</button>
-        <div class="or" data-text="<>"></div>
-        <button class="ui positive button  ">Speichern</button>
+      <div className="ui buttons">
+        <button className="ui red button ">Absagen</button>
+        <div className="or" data-text="<>"></div>
+        <button className="ui positive button" onClick={onFormSubmit}>
+          Speichern
+        </button>
       </div>
     </div>
   );
