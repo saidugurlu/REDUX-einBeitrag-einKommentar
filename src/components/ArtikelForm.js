@@ -1,8 +1,9 @@
-import { useState } from "react";
-import axios from "axios";
+import { useState, useContext } from "react";
 import { useNavigate } from "react-router-dom";
+import { AppContext } from "../AppContext";
 
 const ArtikelForm = () => {
+  const { api } = useContext(AppContext);
   const [article, setArticle] = useState({ title: "", content: "" });
   const navigate = useNavigate();
   const [error, setError] = useState("");
@@ -12,7 +13,7 @@ const ArtikelForm = () => {
 
   const onFormSubmit = async () => {
     setError("")
-   try {await axios.post("https://react-yazi-yorum.herokuapp.com/posts", article);
+   try {await api().post("/posts", article);
     navigate("/", {replace: true});
   } catch (error){
     setError("Artikeltitel und Textinhalt müssen ausgefüllt werden!")

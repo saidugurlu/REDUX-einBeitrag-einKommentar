@@ -1,17 +1,19 @@
 import { useParams } from "react-router-dom";
-import { useState, useEffect } from "react";
+import { useState, useEffect, useContext } from "react";
 import ArtikelComments from "./ArtikelComments";
-import axios from "axios";
+import { AppContext } from "../AppContext";
+
 
 const ArtikelDetail = () => {
+  const { api } = useContext(AppContext);
   const { id } = useParams();
   const [comments, setComments] = useState([]);
   const [articleDetails, setArticleDetails] = useState([]);
 
   const handleCommentSubmit = async (e, comment) => {
     e.preventDefault();
-    await axios.post(
-      `https://react-yazi-yorum.herokuapp.com/posts/${id}/comments`,
+    await api().post(
+      `/posts/${id}/comments`,
       comment
     );
   };
@@ -19,7 +21,7 @@ const ArtikelDetail = () => {
   useEffect(() => {
     (async () => {
       setArticleDetails(
-        (await axios.get(`https://react-yazi-yorum.herokuapp.com/posts/${id}`)).data
+        (await api().get(`/posts/${id}`)).data
       );
     })();
   });
@@ -28,8 +30,8 @@ const ArtikelDetail = () => {
     (async () => {
       setComments(
         (
-          await axios.get(
-            `https://react-yazi-yorum.herokuapp.com/posts/${id}/comments`
+          await api().get(
+            `/posts/${id}/comments`
           )
         ).data
       );
