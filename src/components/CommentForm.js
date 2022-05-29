@@ -8,8 +8,8 @@ const initialComment = {
 const CommentForm = ({ handleCommentSubmit }) => {
   const [comment, setComment] = useState(initialComment);
 
-  const handleOnChange = (e) => {
-    setComment({ ...comment, [e.target.name]: e.target.value });
+  const handleOnChange = (event) => {
+    setComment({ ...comment, [event.target.name]: event.target.value });
   };
 
   return (

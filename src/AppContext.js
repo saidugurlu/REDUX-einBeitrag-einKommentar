@@ -16,7 +16,7 @@ const AppProvider = ({ children }) => {
     })();
   }, []);
   return (
-    <AppContext.Provider value={{ articles }}>{children}</AppContext.Provider>
+    <AppContext.Provider value={{ articles}}>{children}</AppContext.Provider>
   );
 };
 

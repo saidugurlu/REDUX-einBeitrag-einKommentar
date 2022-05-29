@@ -1,17 +1,21 @@
-import { useState } from "react";
+import { useState} from "react";
 import axios from "axios";
+import { useNavigate } from "react-router-dom";
 
 const ArtikelForm = () => {
   const [article, setArticle] = useState({ title: "", content: "" });
+  const navigate = useNavigate();
 
   const onInputChange = (e) =>
     setArticle({ ...article, [e.target.name]: e.target.value });
 
-  const onFormSubmit = async (e) => {
-    e.preventDefault(); // for sicherheit
-
+  const onFormSubmit = async () => {
     await axios.post("https://react-yazi-yorum.herokuapp.com/posts", article);
+    setArticle(article);
+    navigate("/")
   };
+
+
 
   return (
     <div className="ui form">
@@ -35,11 +39,11 @@ const ArtikelForm = () => {
       </div>
 
       <div className="ui buttons">
-        <button className="ui red button ">Absagen</button>
-        <div className="or" data-text="<>"></div>
-        <button className="ui positive button" onClick={onFormSubmit}>
+        <button className="ui black button" onClick={onFormSubmit}>
           Speichern
         </button>
+        <div className="or" data-text="<>"></div>
+        <button className="ui button ">Absagen</button>
       </div>
     </div>
   );
