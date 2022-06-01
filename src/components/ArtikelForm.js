@@ -12,7 +12,8 @@ const ArtikelForm = (edit) => {
   const onInputChange = (e) =>
     setArticle({ ...article, [e.target.name]: e.target.value });
 
-  const onFormSubmit = async () => {
+  const onFormSubmit = async (e) => {
+    e.preventDefault();
     setError("")
    try {await api().post("/posts", article);
     navigate("/", {replace: true});
