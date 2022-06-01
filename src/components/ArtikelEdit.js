@@ -14,7 +14,7 @@ const ArtikelEdit = () => {
         setEdit((await api().get(`/posts/${id}`)).data);
   
       })();
-  });
+  },[]);
 
 
   return (

@@ -1,44 +1,50 @@
 import { useState, useContext, useEffect } from "react";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import { AppContext } from "../AppContext";
-
 
 const ArtikelForm = (edit) => {
   const { api } = useContext(AppContext);
   const [article, setArticle] = useState({ title: "", content: "" });
   const navigate = useNavigate();
   const [error, setError] = useState("");
-//console.log(edit);
+  const { id } = useParams();
   const onInputChange = (e) =>
     setArticle({ ...article, [e.target.name]: e.target.value });
 
   const onFormSubmit = async (e) => {
     e.preventDefault();
-    setError("")
-   try {await api().post("/posts", article);
-    navigate("/", {replace: true});
-  } catch (error){
-    setError("Artikeltitel und Textinhalt müssen ausgefüllt werden!")
-  }
+    setError("");
+
+    if (edit) {
+      try {
+        await api().put(`/posts/${id}`, article);
+        navigate(`/posts/${id}`, { replace: true });
+      } catch (error) {
+        setError("Artikeltitel und Textinhalt müssen ausgefüllt werden!");
+      }
+    } else {
+      try {
+        await api().post("/posts", article);
+        navigate("/", { replace: true });
+      } catch (error) {
+        setError("Artikeltitel und Textinhalt müssen ausgefüllt werden!");
+      }
+    }
   };
 
-  useEffect(() =>{
-    if(edit.title && edit.content) setArticle(edit)
-    //if(edit?.title && edit.content) setArticle(edit) (solve for edit / itle undefinied)
-  }, [edit])
+  useEffect(() => {
+    if ({ edit }) setArticle(edit);
+    //if(edit?.title && edit.content) setArticle(edit) (solve for edit / title undefinied)
+  }, [edit]);
 
   return (
-
-    <div className="ui form">{
-      error && (  <div className="ui negative message">
- 
-      <div className="header">
-        Ups!
-      </div>
-      <p>{error}
-    </p></div>)
-    }
-  
+    <div className="ui form">
+      {error && (
+        <div className="ui negative message">
+          <div className="header">Ups!</div>
+          <p>{error}</p>
+        </div>
+      )}
 
       <div className="field">
         <label>Artikeltitel</label>
