@@ -2,6 +2,7 @@ import { Routes, Route } from "react-router-dom";
 import Artikelliste from "./components/Artikelliste";
 import ArtikelDetail  from "./components/ArtikelDetail";
 import ArtikelAdd  from "./components/ArtikelAdd";
+import ArtikelEdit  from "./components/ArtikelEdit";
 
 function App() {
   return (
@@ -13,6 +14,7 @@ function App() {
           <Route path="/" element={<Artikelliste />} />
           <Route path="/posts/:id" element={<ArtikelDetail />} />
           <Route path="/artikeladd" element={<ArtikelAdd />} />
+          <Route path="/posts/:id/edit" element={<ArtikelEdit />} />
         </Routes>
       </div>
     </div>

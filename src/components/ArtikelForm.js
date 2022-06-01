@@ -1,13 +1,14 @@
-import { useState, useContext } from "react";
+import { useState, useContext, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { AppContext } from "../AppContext";
 
-const ArtikelForm = () => {
+
+const ArtikelForm = (edit) => {
   const { api } = useContext(AppContext);
   const [article, setArticle] = useState({ title: "", content: "" });
   const navigate = useNavigate();
   const [error, setError] = useState("");
-
+//console.log(edit);
   const onInputChange = (e) =>
     setArticle({ ...article, [e.target.name]: e.target.value });
 
@@ -19,6 +20,11 @@ const ArtikelForm = () => {
     setError("Artikeltitel und Textinhalt müssen ausgefüllt werden!")
   }
   };
+
+  useEffect(() =>{
+    if(edit.title && edit.content) setArticle(edit)
+    //if(edit?.title && edit.content) setArticle(edit) (solve for edit / itle undefinied)
+  }, [edit])
 
   return (
 
