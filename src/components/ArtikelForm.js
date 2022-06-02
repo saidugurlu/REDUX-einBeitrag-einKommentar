@@ -1,40 +1,26 @@
-/* eslint-disable react-hooks/exhaustive-deps */
-import { useState, useContext, useEffect } from "react";
+import { useState, useContext } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import { AppContext } from "../AppContext";
 
 const ArtikelForm = (props) => {
-  console.log(props);
-  const { api } = useContext(AppContext);
-  const [article, setArticle] = useState(props.article);
-  const navigate = useNavigate();
-  const [error, setError] = useState("");
-  const { id } = useParams();
 
+  const { api, getArticles } = useContext(AppContext);
+  const [article, setArticle] = useState(props.article);
+  const [error, setError] = useState("");
+  const navigate = useNavigate();
+  const { id } = useParams();
 
   const onInputChange = (e) => {
     const _article = article;
     _article[e.target.name] = e.target.value;
-    setArticle({..._article});
+    setArticle({ ..._article });
   };
 
-
-
-  //setArticle({ ...article, [e.target.name]: e.target.value });}
-
   const onFormSubmit = async () => {
-    //alert("HalloEdward");
-    // e.preventDefault();
     setError("");
-    console.log("Form");
-    /*  const articleExists = () => {
-      console.log(Object.entries(article));
-      return Object.entries(article).length > 0;
-    }; */
 
-    //console.log(articleToEdit);
     if (props.type === "edit") {
-      console.log("is edit");
+    
       try {
         await api().put(`/posts/${id}`, article);
         console.log(article);
@@ -42,23 +28,22 @@ const ArtikelForm = (props) => {
       } catch (error) {
         setError("Artikeltitel und Textinhalt müssen ausgefüllt werden!");
       }
-    } else {
+    } 
+    
+    else {
+
       try {
         console.log("POST");
         await api().post("/posts", article);
-
+        getArticles();
         navigate("/", { replace: true });
       } catch (error) {
         setError("Artikeltitel und Textinhalt müssen ausgefüllt werden!");
       }
-      console.log(error);
+      
     }
   };
 
-  /*   useEffect(() => {
-    if ({}) setArticle(articleToEdit);
-    //if(articleToEdit?.title && articleToEdit.content) setArticle(edit) // (solve for edit / title undefinied)
-  }, []); */
 
   return (
     <div className="ui form">

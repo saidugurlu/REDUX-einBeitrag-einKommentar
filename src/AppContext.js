@@ -13,18 +13,21 @@ const AppProvider = ({ children }) => {
       }
     )
   }
+const getArticles = () => {
+  (async () => {
+    const response = await axios.get(
+      "https://react-yazi-yorum.herokuapp.com/posts"
+    );
 
+    setArticles(response.data);
+  })();
+}
   useEffect(() => {
-    (async () => {
-      const response = await axios.get(
-        "https://react-yazi-yorum.herokuapp.com/posts"
-      );
-
-      setArticles(response.data);
-    })();
+    getArticles();
+  
   }, []);
   return (
-    <AppContext.Provider value={{ articles, api}}>{children}</AppContext.Provider>
+    <AppContext.Provider value={{ getArticles, articles, api}}>{children}</AppContext.Provider>
   );
 };
 
