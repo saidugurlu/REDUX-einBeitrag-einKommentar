@@ -4,16 +4,22 @@ import { useNavigate, useParams } from "react-router-dom";
 import { AppContext } from "../AppContext";
 
 const ArtikelForm = (props) => {
+  console.log(props);
   const { api } = useContext(AppContext);
   const [article, setArticle] = useState(props.article);
   const navigate = useNavigate();
   const [error, setError] = useState("");
   const { id } = useParams();
+
+
   const onInputChange = (e) => {
     const _article = article;
     _article[e.target.name] = e.target.value;
-    setArticle(_article);
+    setArticle({..._article});
   };
+
+
+
   //setArticle({ ...article, [e.target.name]: e.target.value });}
 
   const onFormSubmit = async () => {
