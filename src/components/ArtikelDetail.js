@@ -18,13 +18,13 @@ const ArtikelDetail = () => {
     (async () => {
       setArticleDetails((await api().get(`/posts/${id}`)).data);
     })();
-  });
+  },[]);
 
   useEffect(() => {
     (async () => {
       setComments((await api().get(`/posts/${id}/comments`)).data);
     })();
-  });
+  },[]);
 
   return (
     <>
