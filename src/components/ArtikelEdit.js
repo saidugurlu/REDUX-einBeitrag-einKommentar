@@ -5,13 +5,13 @@ import { useParams } from "react-router-dom";
 
 const ArtikelEdit = () => {
   const { api } = useContext(AppContext);
-  const [edit, setEdit] = useState({})
+  const [articleToEdit, setArticleToEdit] = useState({})
   const { id } = useParams();
     
   
   useEffect(() => {
     (async () => {
-        setEdit((await api().get(`/posts/${id}`)).data);
+      setArticleToEdit((await api().get(`/posts/${id}`)).data);
   
       })();
   },[]);
@@ -20,7 +20,7 @@ const ArtikelEdit = () => {
   return (
     <>
       <h1>Artikel bearbeiten</h1>
-      <ArtikelForm  title={edit.title} content={edit.content} />
+      <ArtikelForm type="edit"  article={articleToEdit} />
     </>
   );
 };
