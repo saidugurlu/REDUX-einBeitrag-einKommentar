@@ -23,7 +23,6 @@ const ArtikelForm = (props) => {
     
       try {
         await api().put(`/posts/${id}`, article);
-        console.log(article);
         navigate(`/posts/${id}`, { replace: true });
       } catch (error) {
         setError("Artikeltitel und Textinhalt müssen ausgefüllt werden!");
