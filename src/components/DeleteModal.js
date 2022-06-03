@@ -6,7 +6,7 @@ import { AppContext } from "../AppContext";
 const DeleteModal = () => {
   const [open, setOpen] = useState(false);
   const [error, setError] = useState("");
-  const { api } = useContext(AppContext);
+  const { api, getArticles } = useContext(AppContext);
   const navigate = useNavigate();
   const { id } = useParams();
 
@@ -14,6 +14,7 @@ const DeleteModal = () => {
     try {
       await api().delete(`/posts/${id}`);
       setError("");
+      getArticles();
       navigate("/", { replace: true });
     } catch (error) {
       setError("Beim Löschen ist ein Fehler aufgetreten!");
