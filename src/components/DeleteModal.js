@@ -23,12 +23,12 @@ const DeleteModal = () => {
   return (
     <>
       <Modal
-        size= 'tiny' 
+        size="tiny"
         centered={false}
         open={open}
         onClose={() => setOpen(false)}
         onOpen={() => setOpen(true)}
-        trigger={<Button >Löschen</Button>}
+        trigger={<Button>Löschen</Button>}
       >
         <Modal.Header>Artikel löschen!</Modal.Header>
         <Modal.Content>
@@ -38,10 +38,14 @@ const DeleteModal = () => {
           </Modal.Description>
         </Modal.Content>
         <Modal.Actions>
-        <div className="ui buttons">
-          <Button className="ui black button" onClick={() => setOpen(false)}>Absagen</Button>
-          <div className="or" data-text="<>"></div>
-          <Button className="ui button" onClick={() => handleDelete(id)}>Löschen</Button>
+          <div className="ui buttons">
+            <Button className="ui black button" onClick={() => setOpen(false)}>
+              Absagen
+            </Button>
+            <div className="or" data-text="<>"></div>
+            <Button className="ui button" onClick={() => handleDelete(id)}>
+              Löschen
+            </Button>
           </div>
         </Modal.Actions>
       </Modal>
