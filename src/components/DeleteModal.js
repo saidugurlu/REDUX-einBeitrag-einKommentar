@@ -23,6 +23,7 @@ const DeleteModal = () => {
   return (
     <>
       <Modal
+        size= 'tiny' 
         centered={false}
         open={open}
         onClose={() => setOpen(false)}
