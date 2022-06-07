@@ -7,7 +7,7 @@ export const AppContext = createContext();
 const AppProvider = ({ children }) => {
   const [articles, setArticles] = useState([]);
 const articles2 = useSelector((state) => state.articles)
-console.log({articles2});
+
   const api = () => {
     return axios.create(
       {
