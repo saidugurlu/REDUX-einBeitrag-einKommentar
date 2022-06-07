@@ -1,9 +1,15 @@
 import { Link } from "react-router-dom";
-import { AppContext } from "../AppContext";
-import { useContext } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { getArticles } from "../actions";
+import { useEffect } from "react";
 
 const Artikelliste = () => {
-  const { articles } = useContext(AppContext);
+  const articles = useSelector((state) => state.articles);
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+    dispatch(getArticles());
+  }, []);
 
   return (
     <>
